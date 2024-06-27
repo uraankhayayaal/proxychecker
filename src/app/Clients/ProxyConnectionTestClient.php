@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Services;
+namespace App\Clients;
 
-use App\Models\Proxy;
 use Illuminate\Support\Facades\Log;
 
-class ProxyTestService
+class ProxyConnectionTestClient implements ClientInterface
 {
     const URL = 'https://api.ipify.org?format=json';
 
-    public function getSpeedAndTimeout(Proxy $proxy) : array
+    public function handle(string $ip, string $port) : array
     {
         try {
             $loadtime = time();
 
-            $response = $this->curl($proxy->ip, $proxy->port);
+            $response = $this->curl($ip, $port);
 
             $speed = time() - $loadtime; // TODO: Calculate
 
@@ -24,7 +23,8 @@ class ProxyTestService
                 return [
                     'isConnected' => true,
                     'speed' => $speed,
-                    'externalIp' => json_decode($response, true)['ip'],
+                    'timeout' => $speed,
+                    'externalIp' => json_decode($response, true)['ip']
                 ];
             }
         } catch (\Throwable $th) {
@@ -32,9 +32,7 @@ class ProxyTestService
         }
 
         return [
-            'isConnected' => false,
-            'speed' => null,
-            'externalIp' => null,
+            'isConnected' => false
         ];
     }
 

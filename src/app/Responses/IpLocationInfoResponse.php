@@ -2,7 +2,7 @@
 
 namespace App\Responses;
 
-class IpInfoResponse
+class IpLocationInfoResponse
 {
     static public function success(
         string $ip,
@@ -10,10 +10,7 @@ class IpInfoResponse
         string $type,
         string $country,
         string $city,
-        bool $status,
-        string $speed,
-        float $timeout,
-        string $externalIp,
+        bool $status
         ) : array
     {
         return [
@@ -23,10 +20,7 @@ class IpInfoResponse
             'type' => $type,
             'country' => $country,
             'city' => $city,
-            'status' => $status,
-            'speed' => $speed,
-            'timeout' => $timeout,
-            'externalIp' => $externalIp,
+            'status' => $status
         ];
     }
 

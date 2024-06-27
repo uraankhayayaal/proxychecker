@@ -32,6 +32,24 @@ services:
       MYSQL_USER: ${MYSQL_USERNAME}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
+  qw:
+    image: bitnami/laravel:10.3.3
+    container_name: proxychecker-qw
+    tty: true
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USERNAME: ${MYSQL_USERNAME}
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./src:/app
+      - ./conf/php:/usr/local/etc/php/conf.d
+    networks:
+      - laravel
+    command: php artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
+    restart: always
+
 networks:
   laravel:
     driver: 'bridge'

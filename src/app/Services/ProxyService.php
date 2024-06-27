@@ -29,11 +29,4 @@ class ProxyService
     {
         return $this->repository->update($model, $params);
     }
-
-    public function incrementViews(Proxy $model) : Proxy
-    {
-        return $this->repository->update($model, [
-            'views' => $model->views++,
-        ]);
-    }
 }

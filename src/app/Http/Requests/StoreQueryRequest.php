@@ -2,17 +2,17 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\IsIpAddress;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StorePostRequest extends FormRequest
+class StoreQueryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        return true;
     }
 
     /**
@@ -23,7 +23,7 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'addresses' => ['required', 'string', new IsIpAddress],
         ];
     }
 }

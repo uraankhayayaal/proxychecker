@@ -29,11 +29,4 @@ class QueryService
     {
         return $this->repository->update($model, $params);
     }
-
-    public function incrementViews(Query $model) : Query
-    {
-        return $this->repository->update($model, [
-            'views' => $model->views++,
-        ]);
-    }
 }
