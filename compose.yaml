@@ -2,7 +2,7 @@ services:
 
   app:
     image: bitnami/laravel:10.3.3
-    container_name: lara-app
+    container_name: proxychecker-app
     restart: unless-stopped
     ports:
       - 8000:8000
@@ -20,7 +20,7 @@ services:
 
   db:
     image: mysql
-    container_name: lara-db
+    container_name: proxychecker-db
     restart: always
     volumes:
       - ./cache/db_data:/var/lib/mysql

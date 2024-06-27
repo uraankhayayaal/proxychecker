@@ -2,7 +2,7 @@
 
 namespace App\Responses;
 
-class AuthResponse extends BaseResponse
+class AuthResponse extends BaseApiResponse
 {
     static public function logout()
     {

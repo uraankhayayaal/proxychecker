@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProxyController;
+use App\Http\Middleware\EnsureProxiesFormIsValid;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('proxy/check', [ProxyController::class, 'check']);
+Route::get('proxy/index', [ProxyController::class, 'index']);

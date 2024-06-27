@@ -4,7 +4,7 @@ namespace App\Responses;
 
 use Illuminate\Http\JsonResponse;
 
-class BaseResponse
+class BaseApiResponse
 {
     static public function json(mixed $data) : JsonResponse
     {
