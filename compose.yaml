@@ -1,0 +1,37 @@
+services:
+
+  app:
+    image: bitnami/laravel:10.3.3
+    container_name: lara-app
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    volumes:
+      - ./src:/app
+      - ./conf/php:/usr/local/etc/php/conf.d
+    networks:
+      - laravel
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USERNAME: ${MYSQL_USERNAME}
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+
+  db:
+    image: mysql
+    container_name: lara-db
+    restart: always
+    volumes:
+      - ./cache/db_data:/var/lib/mysql
+    networks:
+      - laravel
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+networks:
+  laravel:
+    driver: 'bridge'
